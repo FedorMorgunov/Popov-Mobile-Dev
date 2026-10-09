@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:team="clr-namespace:LabShared"
+             x:Class="Lab1_7_MAUI_XAML.MainPage"
+             Padding="5"
+             BackgroundColor="Lavender"
+             Title="Popov Sliders">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Сведения о команде: данные берутся из TeamInfo через расширение разметки x:Static -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource TeamBannerColor}"
+                StrokeThickness="0"
+                Padding="10,6">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Лабораторная работа 1. Задача 7"
+                           TextColor="White"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="x:Reference, режимы привязки TwoWay / OneWayToSource"
+                           TextColor="#FDE68A"
+                           FontSize="14" />
+                    <Label Text="{x:Static team:TeamInfo.Group}"
+                           TextColor="White"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Label Grid.Column="1"
+                       Text="{x:Static team:TeamInfo.Members}"
+                       TextColor="White"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Scaled and rotated Label -->
+            <Label x:Name="label"
+                   Text="TEXT"
+                   TextColor="Black"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <!-- Slider и Label для работы со Scale -->
+            <Slider x:Name="scaleSlider"
+                    x:DataType="Label"
+                    BindingContext="{x:Reference label}"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Maximum="10"
+                    Value="{Binding Scale, Mode=TwoWay}"
+                    Margin="20,0,0,0" />
+            <Label x:DataType="Slider"
+                   BindingContext="{x:Reference scaleSlider}"
+                   Text="{Binding Value, StringFormat='Scale = {0:F1}'}"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center" />
+
+            <!-- Slider и Label для работы с Rotation -->
+            <Slider x:Name="rotationSlider"
+                    x:DataType="Label"
+                    BindingContext="{x:Reference label}"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Maximum="360"
+                    Value="{Binding Rotation, Mode=OneWayToSource}"
+                    Margin="20,0,0,0" />
+            <Label x:DataType="Slider"
+                   BindingContext="{x:Reference rotationSlider}"
+                   Text="{Binding Value, StringFormat='Rotation = {0:F0}'}"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center" />
+
+            <!-- Slider и Label для работы с RotationX -->
+            <Slider x:Name="rotationXSlider"
+                    x:DataType="Label"
+                    BindingContext="{x:Reference label}"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Maximum="360"
+                    Value="{Binding RotationX, Mode=OneWayToSource}"
+                    Margin="20,0,0,0" />
+            <Label x:DataType="Slider"
+                   BindingContext="{x:Reference rotationXSlider}"
+                   Text="{Binding Value, StringFormat='RotationX = {0:F0}'}"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Grid.Row="3"
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center" />
+
+            <!-- Slider и Label для работы с RotationY -->
+            <Slider x:Name="rotationYSlider"
+                    x:DataType="Label"
+                    BindingContext="{x:Reference label}"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Maximum="360"
+                    Value="{Binding RotationY, Mode=OneWayToSource}"
+                    Margin="20,0,0,0" />
+            <Label x:DataType="Slider"
+                   BindingContext="{x:Reference rotationYSlider}"
+                   Text="{Binding Value, StringFormat='RotationY = {0:F0}'}"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

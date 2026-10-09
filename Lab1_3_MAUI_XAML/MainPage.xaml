@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:team="clr-namespace:LabShared"
+             x:Class="Lab1_3_MAUI_XAML.MainPage"
+             Title="Popov XAML Grid">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Сведения о команде: данные берутся из TeamInfo через расширение разметки x:Static -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource TeamBannerColor}"
+                StrokeThickness="0"
+                Padding="10,6">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Лабораторная работа 1. Задача 3"
+                           TextColor="White"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="Присоединённые свойства Grid.Row / Column / RowSpan / ColumnSpan"
+                           TextColor="#FDE68A"
+                           FontSize="14" />
+                    <Label Text="{x:Static team:TeamInfo.Group}"
+                           TextColor="White"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Label Grid.Column="1"
+                       Text="{x:Static team:TeamInfo.Members}"
+                       TextColor="White"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Работа с MAUI"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   TextColor="White"
+                   BackgroundColor="Blue" />
+            <BoxView Color="Silver"
+                     Grid.Row="0"
+                     Grid.Column="1" />
+            <BoxView Color="Teal"
+                     Grid.Row="1"
+                     Grid.Column="0" />
+            <Label Text="Метка в ячейке"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   TextColor="Purple"
+                   BackgroundColor="Aqua"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+            <Label Text="Объединение двух строк"
+                   Grid.Row="0"
+                   Grid.Column="2"
+                   Grid.RowSpan="2"
+                   TextColor="Yellow"
+                   BackgroundColor="Blue"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+            <Label Text="Объединение двух колонок"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   TextColor="Blue"
+                   BackgroundColor="Yellow"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+            <Label Text="Размер 100x100"
+                   Grid.Row="2" Grid.Column="2"
+                   TextColor="Aqua"
+                   BackgroundColor="Red"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

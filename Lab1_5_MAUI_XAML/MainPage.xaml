@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lab1_5_MAUI_XAML"
+             xmlns:team="clr-namespace:LabShared"
+             x:Class="Lab1_5_MAUI_XAML.MainPage"
+             Title="Popov ListView"
+             BackgroundColor="Lavender">
+    <ContentPage.Resources>
+        <x:Double x:Key="boxSize">50</x:Double>
+        <x:Int32 x:Key="rowHeight">60</x:Int32>
+        <local:FloatToIntConverter x:Key="intConverter" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Сведения о команде: данные берутся из TeamInfo через расширение разметки x:Static -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource TeamBannerColor}"
+                StrokeThickness="0"
+                Padding="10,6">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Лабораторная работа 1. Задача 5"
+                           TextColor="White"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="Словарь ресурсов, StaticResource, x:Static, конвертер привязки"
+                           TextColor="#FDE68A"
+                           FontSize="14" />
+                    <Label Text="{x:Static team:TeamInfo.Group}"
+                           TextColor="White"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Label Grid.Column="1"
+                       Text="{x:Static team:TeamInfo.Members}"
+                       TextColor="White"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <ListView Grid.Row="1"
+                  ItemsSource="{x:Static local:NamedColor.All}"
+                  RowHeight="{StaticResource rowHeight}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:NamedColor">
+                    <ViewCell>
+                        <StackLayout Padding="5, 5, 0, 5"
+                                     Orientation="Horizontal"
+                                     Spacing="15">
+                            <BoxView WidthRequest="{StaticResource boxSize}"
+                                     HeightRequest="{StaticResource boxSize}"
+                                     Color="{Binding Color}" />
+                            <StackLayout Padding="5, 0, 0, 0"
+                                         VerticalOptions="Center">
+                                <Label Text="{Binding FriendlyName}"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       FontSize="20" />
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="0">
+                                    <Label Text="{Binding Red,
+                                                  Converter={StaticResource intConverter},
+                                                  ConverterParameter=255,
+                                                  StringFormat='R={0:X2}'}"
+                                           FontSize="20"
+                                           TextColor="Black"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding Green,
+                                                  Converter={StaticResource intConverter},
+                                                  ConverterParameter=255,
+                                                  StringFormat=', G={0:X2}'}"
+                                           FontSize="20"
+                                           TextColor="Black"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding Blue,
+                                                  Converter={StaticResource intConverter},
+                                                  ConverterParameter=255,
+                                                  StringFormat=', B={0:X2}'}"
+                                           FontSize="20"
+                                           TextColor="Black"
+                                           FontAttributes="Bold" />
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

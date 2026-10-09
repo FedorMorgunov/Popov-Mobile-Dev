@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:team="clr-namespace:LabShared"
+             x:Class="Lab1_6_MAUI_XAML.MainPage"
+             Title="Popov DateTime"
+             Background="Lavender"
+             x:DataType="sys:DateTime">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Сведения о команде: данные берутся из TeamInfo через расширение разметки x:Static -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource TeamBannerColor}"
+                StrokeThickness="0"
+                Padding="10,6">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Лабораторная работа 1. Задача 6"
+                           TextColor="White"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="BindingContext = {x:Static sys:DateTime.Now} + StringFormat"
+                           TextColor="#FDE68A"
+                           FontSize="14" />
+                    <Label Text="{x:Static team:TeamInfo.Group}"
+                           TextColor="White"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Label Grid.Column="1"
+                       Text="{x:Static team:TeamInfo.Members}"
+                       TextColor="White"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <StackLayout Grid.Row="1"
+                     BindingContext="{x:Static sys:DateTime.Now}"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
+            <Label Text="{Binding Year, StringFormat='The year is {0}'}"
+                   TextColor="Black"
+                   FontSize="34"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+            <Label Text="{Binding StringFormat='The month is {0:MMMM}'}"
+                   TextColor="Black"
+                   FontSize="34"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+            <Label Text="{Binding Day, StringFormat='The day is {0}'}"
+                   TextColor="Black"
+                   FontSize="34"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+            <Label Text="{Binding StringFormat='The time is {0:T}'}"
+                   TextColor="Black"
+                   FontSize="34"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+        </StackLayout>
+    </Grid>
+</ContentPage>
